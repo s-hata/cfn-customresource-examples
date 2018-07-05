@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Custome Resource Handler
+Globals:
+  Function:
+    Timeout: 60
+Resources:
+  Example:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: customresource.CustomResourceHandler
+      Runtime: java8
+      CodeUri: target/customresource-1.0.0.jar
