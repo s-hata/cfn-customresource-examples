@@ -1,0 +1,37 @@
+apply plugin: 'java'
+
+group = 'ci.ignite'
+version = '0.0.1-SNAPSHOT'
+jar.baseName = 'customresource'
+
+group = 'ci.ignite'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile (
+    'com.amazonaws:aws-lambda-java-core:1.2.0',
+    'com.amazonaws:aws-lambda-java-events:2.2.2',
+    'org.json:json:20180130',
+    'com.amazonaws:aws-java-sdk-bom:1.11.360'
+  )
+}
+
+jar {
+  into('/') {
+    from configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+//task buildZip(type: Zip) {
+//  from compileJava
+//  from processResources              
+//  into('lib') {
+//    from configurations.compile.Classpath
+//  }
+//}
+//
+//build.dependsOn buildZip
